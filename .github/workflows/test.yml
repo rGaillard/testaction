@@ -21,4 +21,4 @@ jobs:
         steps:
             - name: Test mysql connection
               run: |
-                  mysql -h mariadb -P 33306 -u root -e "show databases;"
+                  mysql -h 127.0.0.1 -P 33306 -u root -e "show databases;"
