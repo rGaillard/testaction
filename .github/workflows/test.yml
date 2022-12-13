@@ -1,9 +1,7 @@
 name: Running automatic tests
-
 on:
   pull_request:
     types: [opened, synchronize]
-
 jobs:
     build_and_deploy:
         runs-on: ubuntu-latest
