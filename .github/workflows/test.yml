@@ -16,13 +16,8 @@ jobs:
               - 33306:3306
              options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=10
              env:
-               MARIADB_ROOT_PASSWORD: root
                MARIADB_DATABASE: eventdrive
-               MARIADB_USER: root
-               MARIADB_PASSWORD: root
-               MARIADB_USER: root
                MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: yes
-               MARIADB_ALLOW_EMPTY_PASSWORD: yes
                MARIADB_DATABASE: eventdrive
         steps:
             - name: Test mysql connection
