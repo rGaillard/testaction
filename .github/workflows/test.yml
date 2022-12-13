@@ -1,0 +1,32 @@
+name: Running automatic tests
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+    build_and_deploy:
+        runs-on: ubuntu-latest
+        env:
+          ACTIONS_ALLOW_UNSECURE_COMMANDS: true
+        container:
+            image: eventdrive/build-github
+        services:
+           mariadb:
+             image: mariadb:10.2
+             ports:
+              - 33306:3306
+             options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=10
+             env:
+               MARIADB_ROOT_PASSWORD: root
+               MARIADB_DATABASE: eventdrive
+               MARIADB_USER: root
+               MARIADB_PASSWORD: root
+               MARIADB_USER: root
+               MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: yes
+               MARIADB_ALLOW_EMPTY_PASSWORD: yes
+               MARIADB_DATABASE: eventdrive
+        steps:
+            - name: Test mysql connection
+              run: |
+                  mysql -h mariadb -P 33306 -u root -e "show databases;"
